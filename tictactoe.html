@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link href="tictactoe.css" rel="stylesheet" type="text/css" />
+<body>
+	<div id='mainDiv' ng-app="appTicTacToe" ng-controller="mainController">
+		<div id='statusDiv'>
+			<div>
+				<p>
+					Your symbol is:
+					<label ng-repeat="player in players">
+						<input
+						 	name="selectedPlayer"
+						 	ng-model="$parent.selectedPlayer"
+						 	ng-change="switchPlayer()"
+						 	ng-value="player"
+						 	type="radio">
+						 		{{ player.symbol }}
+						</input>
+					</label>
+				</p>
+			</div>
+			<div>
+				<table>
+					<tr ng-repeat="status in statusTable">
+						<td>{{status}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div id='boardDiv'>
+			<table>
+				<tr ng-repeat="row in rows">
+					<td ng-repeat="cell in row.cells" ng-click="markCell(cell)"
+						ng-model="cell">{{ cell.player.symbol }}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<script>
+		angular.module('appTicTacToe', []);
+	</script>
+	<script src="model.js"></script>
+	<script src="controller.js"></script>
+</body>
+</html>

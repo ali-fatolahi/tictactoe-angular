@@ -1,0 +1,11 @@
+This is my Angular ScratchPad; a TicTacToe application.
+
+Version 1.0:
+- Simple Tic Tac Toe board
+- Computer plays random
+- You can choose whether to play X or O
+
+Next:
+- Write Unit Tests
+- Add a smart computer player
+- Make the status table log every move
