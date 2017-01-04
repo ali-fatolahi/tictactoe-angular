@@ -6,6 +6,14 @@ nobody = new Player(' ');
 xPlayer = new Player('X');
 oPlayer = new Player('O');
 
+function Computer(mode) {
+	this.getMode = function() {
+		return mode;
+	}
+}
+dumbutor = new Computer("Dumb");
+smartutor = new Computer("Smart");
+
 function Cell(player) {
 	this.player = player;
 }

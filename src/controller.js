@@ -8,6 +8,9 @@ app.controller('mainController', function($scope) {
 	$scope.selectedPlayer = xPlayer;
 	$scope.otherPlayer = oPlayer;
 
+	$scope.computers = [dumbutor, smartutor];
+	$scope.selectedComputer = dumbutor;
+	
 	$scope.rows = [];	
 	for (var j = 0; j < 3; j++) {
 		$scope.rows.push(new Row(3));

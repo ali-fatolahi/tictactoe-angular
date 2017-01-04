@@ -8,7 +8,7 @@
 		<div id='statusDiv'>
 			<div>
 				<p>
-					Your symbol is:
+					You play as:
 					<label ng-repeat="player in players">
 						<input
 						 	name="selectedPlayer"
@@ -21,6 +21,21 @@
 					</label>
 				</p>
 			</div>
+		    <div>
+		    	<p>
+			       Computer plays:
+		           <label ng-repeat="computer in computers">
+				      <input
+				           name="selectedComputer"
+				           ng-model="$parent.selectedComputer"
+				           ng-change="switchComputer()"
+				           ng-value="computer"
+				           type="radio">
+				               {{ computer.getMode() }}
+				      </input>
+			      </label>
+			   </p>
+		    </div>	
 			<div>
 				<table>
 					<tr ng-repeat="status in statusTable">
