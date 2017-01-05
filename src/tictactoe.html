@@ -30,7 +30,8 @@
 				           ng-model="$parent.selectedComputer"
 				           ng-change="switchComputer()"
 				           ng-value="computer"
-				           type="radio">
+				           type="radio"
+				           disabled="true">
 				               {{ computer.getMode() }}
 				      </input>
 			      </label>
