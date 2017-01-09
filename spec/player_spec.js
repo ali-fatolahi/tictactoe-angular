@@ -7,7 +7,6 @@ describe("Player Symbol", function() {
 		expect(oPlayer.symbol).toEqual("O");
 	});
 
-
 	it("nobody has \' \' as Symbol", function() {
 		expect(nobody.symbol).toEqual(" ");
 	});
