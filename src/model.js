@@ -14,25 +14,43 @@ function Computer(mode) {
 dumbutor = new Computer("Dumb");
 smartutor = new Computer("Smart");
 
-function Cell(player) {
-	this.player = player;
+function Cell(player, row, col) {
+	var cellPlayer = player;
+	
+	this.getPlayer = function() {
+		return cellPlayer;
+	}
+	
+	this.getRow = function() {
+		return row;
+	}
+	
+	this.getCol = function() {
+		return col;
+	}
+	
+	this.setPlayer = function(newPlayer) {
+		cellPlayer = newPlayer;
+	}
 }
 
-function Row(nCells) {
+function Row(nCells, rowIndex) {
 	this.cells = [];
+	
 	for (var i = 0; i < nCells; i++) {
-		this.cells.push(new Cell(nobody));
+		this.cells.push(new Cell(nobody, rowIndex, i));
 	}
 }
 
 function Status(size) {
-	statusTable = ['Playing ... '];
-	playing = true;
-	squareSize = size * size;
-	emptyCellCount = squareSize;
+	var statusTable = ['Playing ... '];
+	var playing = true;
+	var squareSize = size * size;
+	var emptyCellCount = squareSize;
 	
 	this.updateStatus = function(newLine) {
 		statusTable.push(newLine);
+		alert(statusTable);
 	}
 	
 	this.getStatusTable = function() {
@@ -65,7 +83,7 @@ function Status(size) {
 function Referee(rows) {
 	function isWinnerRow(cells, player) {
 		for (var i = 0; i < cells.length; i++) {
-			if (cells[i].player != player) {
+			if (cells[i].getPlayer() != player) {
 				return false;
 			}
 		}
@@ -75,7 +93,7 @@ function Referee(rows) {
 	
 	function isWinnerColumn(colIndex, player) {
 		for (var i = 0; i < rows.length; i++) {
-			if (rows[i].cells[colIndex].player != player) {
+			if (rows[i].cells[colIndex].getPlayer() != player) {
 				return false;
 			}
 		}
@@ -87,7 +105,7 @@ function Referee(rows) {
 		var size = rows.length;
 		
 		for (var i = 0; i < size; i++) {
-				if (rows[i].cells[size - i - 1].player != player) {
+				if (rows[i].cells[size - i - 1].getPlayer() != player) {
 					return false;
 				}
 		}
@@ -99,7 +117,7 @@ function Referee(rows) {
 		var size = rows.length;
 		
 		for (var i = 0; i < size; i++) {
-				if (rows[i].cells[i].player != player) {
+				if (rows[i].cells[i].getPlayer() != player) {
 					return false;
 				}
 		}

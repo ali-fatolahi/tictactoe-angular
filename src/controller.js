@@ -13,7 +13,7 @@ app.controller('mainController', function($scope) {
 	
 	$scope.rows = [];	
 	for (var j = 0; j < 3; j++) {
-		$scope.rows.push(new Row(3));
+		$scope.rows.push(new Row(3, j));
 	}
 
 	var ref = new Referee($scope.rows);
@@ -23,7 +23,7 @@ app.controller('mainController', function($scope) {
 
 		for (var i = 0; i < 3; i++) {
 			for (var j = 0; j < 3; j++) {
-				if ($scope.rows[i].cells[j].player == nobody) {
+				if ($scope.rows[i].cells[j].getPlayer() == nobody) {
 					emptyCells.push( $scope.rows[i].cells[j] );
 				}
 			}
@@ -31,7 +31,7 @@ app.controller('mainController', function($scope) {
 
 		var max = emptyCells.length;
 		var index = Math.floor(Math.random() * max);
-		emptyCells[index].player = $scope.otherPlayer;
+		emptyCells[index].setPlayer($scope.otherPlayer);
 		status.decrementEmptyCells();
 	}
 
@@ -40,19 +40,20 @@ app.controller('mainController', function($scope) {
 
 		for (var i = 0; i < 3; i++) {
 			for (var j = 0; j < 3; j++) {
-				$scope.rows[i].cells[j].player = nobody;
+				$scope.rows[i].cells[j].setPlayer(nobody);
 			}
 		}
 		
 		status.reset();
+		$scope.statusTable = status.getStatusTable();
 	}
 
 	$scope.markCell = function(cell) {
 		if (status.isDisabled()) {
 			reset();
 		} else {
-			if (cell.player == nobody) {
-				cell.player = $scope.selectedPlayer;
+			if (cell.getPlayer() == nobody) {
+				cell.setPlayer($scope.selectedPlayer);
 				status.decrementEmptyCells();
 				if (ref.isWinner($scope.selectedPlayer)) {
 					status.updateStatus('You win!');
@@ -77,10 +78,10 @@ app.controller('mainController', function($scope) {
 
 		for (var i = 0; i < 3; i++) {
 			for (var j = 0; j < 3; j++) {
-				if ($scope.rows[i].cells[j].player == xPlayer) {
-					$scope.rows[i].cells[j].player = oPlayer;
-				} else if ($scope.rows[i].cells[j].player == oPlayer) {
-					$scope.rows[i].cells[j].player = xPlayer;
+				if ($scope.rows[i].cells[j].getPlayer() == xPlayer) {
+					$scope.rows[i].cells[j].setPlayer(oPlayer);
+				} else if ($scope.rows[i].cells[j].getPlayer() == oPlayer) {
+					$scope.rows[i].cells[j].setPlayer(xPlayer);
 				}
 			}
 		}
