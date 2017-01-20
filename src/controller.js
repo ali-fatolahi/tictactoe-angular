@@ -32,6 +32,7 @@ app.controller('mainController', function($scope) {
 		var max = emptyCells.length;
 		var index = Math.floor(Math.random() * max);
 		emptyCells[index].setPlayer($scope.otherPlayer);
+		status.updateStatus($scope.selectedComputer.getMode() + "utor played (" + emptyCells[index].getRow() + " , " + emptyCells[index].getCol() + ")");
 		status.decrementEmptyCells();
 	}
 
@@ -54,6 +55,7 @@ app.controller('mainController', function($scope) {
 		} else {
 			if (cell.getPlayer() == nobody) {
 				cell.setPlayer($scope.selectedPlayer);
+				status.updateStatus("You played (" + cell.getRow() + " , " + cell.getCol() + ")");
 				status.decrementEmptyCells();
 				if (ref.isWinner($scope.selectedPlayer)) {
 					status.updateStatus('You win!');

@@ -50,7 +50,6 @@ function Status(size) {
 	
 	this.updateStatus = function(newLine) {
 		statusTable.push(newLine);
-		alert(statusTable);
 	}
 	
 	this.getStatusTable = function() {
